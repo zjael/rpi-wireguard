@@ -9,6 +9,12 @@ make install
 modprobe wireguard
 
 cd /etc/wireguard/
+while ! [ -f $interface.conf ] && [ -f peer.conf ];
+do
+    echo "$(date): Waiting for $interface.conf and peer.conf"
+    sleep 30
+done
+
 wg genkey | tee server_private.key | wg pubkey > server_public.key
 wg genkey | tee client_private.key | wg pubkey > client_public.key
 
