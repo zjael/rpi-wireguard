@@ -9,7 +9,7 @@ make install
 modprobe wireguard
 
 cd /etc/wireguard/
-while ! [ -f $interface.conf ] && [ -f peer.conf ];
+while [ ! -f "$interface.conf" ] && [ ! -f "peer.conf" ]
 do
     echo "$(date): Waiting for $interface.conf and peer.conf"
     sleep 30
